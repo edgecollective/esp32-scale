@@ -24,7 +24,9 @@ copies or substantial portions of the Software. -->
 </head>
 <body>
   <!--<h2>Force vs Time</h2>-->
+  <div><img src="./muscle_mike.png"></div>
   <div id="chart-temperature" class="container"></div>
+  <div><img src="./max_force.png"></div>
   <!--<div id="chart-humidity" class="container"></div>-->
 </body>
 <script>
@@ -60,8 +62,8 @@ var chartT = new Highcharts.Chart({
     dateTimeLabelFormats: { second: '%H:%M:%S' }
   },
   yAxis: {
-    title: { text: 'FORCE' },
-    min:-10,
+    title: { text: 'FORCE (pounds)' },
+    min:0,
     max:y_max
     //title: { text: 'Temperature (Fahrenheit)' }
   },
@@ -74,7 +76,7 @@ setInterval(function ( ) {
     if (this.readyState == 4 && this.status == 200) {
       console.log(this.responseText);
       var x = (new Date()).getTime(),
-          y = parseFloat(this.responseText);
+          y = Math.trunc(parseFloat(this.responseText)/3);
           if(y>max_force) {
             max_force=y;
           }
